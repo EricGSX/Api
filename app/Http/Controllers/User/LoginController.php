@@ -40,4 +40,9 @@ class LoginController extends Controller
     {
         return view('users.login');
     }
+
+    public function detail()
+    {
+        return view('users.userdetail');
+    }
 }

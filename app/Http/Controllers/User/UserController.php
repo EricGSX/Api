@@ -15,6 +15,8 @@ class UserController extends BaseController
 
     public function test()
     {
-        return $this->jwtCode;
+        //return 123;
+        return $this->webPayLoad;
     }
+
 }

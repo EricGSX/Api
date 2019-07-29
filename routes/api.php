@@ -16,5 +16,8 @@ use Illuminate\Http\Request;
 Route::post('/login','User\LoginController@login');
 
 Route::group(['middleware'=>'check_jwt'],function(){
+    Route::get('/user2',function(){
+        return 'ok';
+    });
     Route::get('/user','User\UserController@test');
 });

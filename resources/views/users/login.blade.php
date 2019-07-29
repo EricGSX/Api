@@ -351,6 +351,7 @@ window.jQuery || document.write(unescape("%3Cscript src='https://ajax.aspnetcdn.
         $.post('/api/login',{},function(data){
             if(data.code == 200){
                 localStorage.setItem("AuthToken", data.token);
+                window.location.href = '/usersDetail';
             }else{
                 alert(data.msg);
             }

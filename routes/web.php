@@ -10,9 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
+// 前台页面路由入口
+Route::get('/', 'User\LoginController@show');
 Route::get('/users', 'User\LoginController@show');
 Route::get('/usersDetail','User\LoginController@detail');

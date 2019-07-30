@@ -15,8 +15,7 @@ class UserController extends BaseController
 
     public function test()
     {
-        //return 123;
-        return $this->webPayLoad;
+        return ['code'=>200,'msg'=>$this->webPayLoad];
     }
 
 }

@@ -11,8 +11,9 @@ class BaseController extends Controller
     protected $jwtCode;
     public function __construct (Request $request)
     {
-        if($request->header('Authorization')){
-            $this->jwtCode = $request->header('Authorization');
+        $headerAuthToken = $request->header('Authorization');
+        if($headerAuthToken){
+            $this->jwtCode = $headerAuthToken;
             $jwt = new GuoJwt(env('APP_KEY'));
             $this->webPayLoad = $jwt->verifyToken($this->jwtCode);
         }

@@ -29,9 +29,11 @@
         if(data.code == 200){
             var textContent = 'Welcome to Data Center';
         }else{
-            var testContent = data.msg;
+            var textContent = data.msg.name;
+            alert(textContent);
+            window.location.href = '/';
         }
-        $('#userinfo').text(testContent)
+        $('#userinfo').text(textContent)
     })
 </script>
 @endsection

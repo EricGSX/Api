@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
+use App\Libs\Api;
 
 class UserController extends BaseController
 {
@@ -15,7 +16,7 @@ class UserController extends BaseController
 
     public function test()
     {
-        return ['code'=>200,'msg'=>$this->webPayLoad];
+        return response()->json(json_decode($this->webPayLoad,true));
     }
 
 }

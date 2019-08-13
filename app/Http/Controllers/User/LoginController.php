@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Jwt\GuoJwt;
+use App\Libs\Api;
 
 /**
 "iss": "Eric",　　　                 #该JWT的签发者
@@ -21,28 +22,40 @@ class LoginController extends Controller
         try{
             $key = env('APP_KEY');
             $jwt = new GuoJwt($key);
-            $payLoad = [
-                'name' => 'eric.guo',
-                'email'=> 'eric.guo@oceania-inc.com',
-                'role' => 'administrator',
-                'iat'  => time(),
-                'exp'  => time() + 3600
-            ];
-            $token=$jwt->getToken($payLoad);
-            return response()->json(['code' => 200, 'token'=> $token],200);
+            $api = new Api();
+            if(true){
+                $payLoad = [
+                    'name' => 'eric.guo',
+                    'email'=> 'eric.guo@oceania-inc.com',
+                    'role' => 'administrator',
+                    'iat'  => time(),
+                    'exp'  => time() + 3600
+                ];
+                $token=$jwt->getToken($payLoad);
+                return response()->json(['code' => 200, 'token'=> $token]);
+            }else{
+                return response()->json(['code' => 403, 'msg'  => '账号密码错误']);
+            }
         }catch (\Exception $e){
             return response()->json([
-                'code' => 403, 'msg'  => $e->getMessage(),],403);
+                'code' => 403, 'msg'  => $e->getMessage(),]);
         }
     }
 
-    public function show()
+    public function index()
     {
         return view('users.login');
     }
 
-    public function detail()
+    public function show()
     {
         return view('users.userdetail');
+    }
+
+    public function testApiConnect()
+    {
+        $api = new Api();
+        $result = $api->httpRequest('http://192.168.11.146:888/Home/Test');
+        dd($result);
     }
 }

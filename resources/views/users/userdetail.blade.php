@@ -26,8 +26,12 @@
   </div>
 <script>
     $.get('/api/user',{},function(data){
-        console.log(data.msg);
-        $('#userinfo').text(data.msg)
+        if(data.code == 200){
+            var textContent = 'Welcome to Data Center';
+        }else{
+            var testContent = data.msg;
+        }
+        $('#userinfo').text(testContent)
     })
 </script>
 @endsection

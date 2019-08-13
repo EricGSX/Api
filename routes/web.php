@@ -11,6 +11,7 @@
 |
 */
 // 前台页面路由入口
-Route::get('/', 'User\LoginController@show');
-Route::get('/users', 'User\LoginController@show');
-Route::get('/usersDetail','User\LoginController@detail');
+Route::get('/', 'User\LoginController@index');
+Route::get('/users', 'User\LoginController@index');
+Route::get('/users/1','User\LoginController@show');
+Route::get('/test','User\LoginController@testApiConnect');

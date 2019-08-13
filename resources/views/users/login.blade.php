@@ -228,7 +228,7 @@ window.jQuery || document.write(unescape("%3Cscript src='https://ajax.aspnetcdn.
         }
         #login_img p i{
             font-style: normal;
-            margin-right: 45px;
+            margin-right: 25px;
         }
         #login_img p i:nth-last-child(1){
             margin-right: 0;
@@ -331,7 +331,7 @@ window.jQuery || document.write(unescape("%3Cscript src='https://ajax.aspnetcdn.
                     <span></span>
                     <span></span>
                 </span>
-                <p id="title">OCEANIA</p>
+                <p id="title">DATACENTER</p>
             </div>
         </div>
     </div>
@@ -349,9 +349,10 @@ window.jQuery || document.write(unescape("%3Cscript src='https://ajax.aspnetcdn.
     //登录按钮
     function login() {
         $.post('/api/login',{},function(data){
+            console.log(data);
             if(data.code == 200){
                 localStorage.setItem("AuthToken", data.token);
-                window.location.href = '/usersDetail';
+                window.location.href = '/users/1';
             }else{
                 alert(data.msg);
             }

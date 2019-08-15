@@ -25,12 +25,22 @@
         </section>
           <section class="col-lg-6 connectedSortable">
           <div class="nav-tabs-custom">
-              <p id="dashboard3" class="Graph" style="width: 100%;height:400px;">Echarts2</p>
+              <p id="dashboard3" class="Graph" style="width: 100%;height:400px;">Echarts3</p>
           </div>
         </section>
           <section class="col-lg-6 connectedSortable">
           <div class="nav-tabs-custom">
-              <p id="dashboard4" class="Graph" style="width: 100%;height:400px;">Echarts2</p>
+              <p id="dashboard4" class="Graph" style="width: 100%;height:400px;">Echarts4</p>
+          </div>
+        </section>
+          <section class="col-lg-6 connectedSortable">
+          <div class="nav-tabs-custom">
+              <p id="dashboard5" class="Graph" style="width: 100%;height:400px;">Echarts5</p>
+          </div>
+        </section>
+          <section class="col-lg-6 connectedSortable">
+          <div class="nav-tabs-custom">
+              <p id="dashboard6" class="Graph" style="width: 100%;height:400px;">Echarts6</p>
           </div>
         </section>
       </div>
@@ -216,6 +226,93 @@ window.onload=function(){
             }
         ]
     };
+    var option5 = {
+        title: {
+            text: 'Amazon访问漏斗',
+//            subtext: '纯属虚构'
+        },
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c}%"
+        },
+        legend: {
+            data: ['展现','点击','访问','咨询','订单']
+        },
+        calculable: true,
+        series: [
+            {
+                name:'漏斗图',
+                type:'funnel',
+                left: '10%',
+                top: 60,
+                //x2: 80,
+                bottom: 60,
+                width: '80%',
+                // height: {totalHeight} - y - y2,
+                min: 0,
+                max: 100,
+                minSize: '0%',
+                maxSize: '100%',
+                sort: 'descending',
+                gap: 2,
+                label: {
+                    show: true,
+                    position: 'inside'
+                },
+                labelLine: {
+                    length: 10,
+                    lineStyle: {
+                        width: 1,
+                        type: 'solid'
+                    }
+                },
+                itemStyle: {
+                    borderColor: '#fff',
+                    borderWidth: 1
+                },
+                emphasis: {
+                    label: {
+                        fontSize: 20
+                    }
+                },
+                data: [
+                    {value: 60, name: '访问'},
+                    {value: 40, name: '咨询'},
+                    {value: 20, name: '订单'},
+                    {value: 80, name: '点击'},
+                    {value: 100, name: '展现'}
+                ]
+            }
+        ]
+    };
+    var option6 = {
+        title: {
+            text: 'Amazon PV/UV',
+        },
+        legend: {
+            data:['PV','UV']
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        xAxis: {
+            type: 'category',
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            name:'PV',
+            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            type: 'line'
+        },{
+            name:'UV',
+            data: [200, 212, 351, 364, 590, 630, 620],
+            type: 'line'
+        }]
+    };
+
 
 
     var vm = new Vue({
@@ -225,6 +322,8 @@ window.onload=function(){
             chart2: null,
             chart3: null,
             chart4: null,
+            chart5: null,
+            chart6: null,
         },
         mounted:function(){
             this.drawLine();
@@ -239,6 +338,10 @@ window.onload=function(){
                 this.chart3.setOption(option3);
                 this.chart4 = echarts.init(document.getElementById('dashboard4'));
                 this.chart4.setOption(option4);
+                this.chart5 = echarts.init(document.getElementById('dashboard5'));
+                this.chart5.setOption(option5);
+                this.chart6 = echarts.init(document.getElementById('dashboard6'));
+                this.chart6.setOption(option6);
             }
         }
     })

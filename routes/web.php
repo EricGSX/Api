@@ -20,3 +20,4 @@ Route::get('/test','User\LoginController@testApiConnect');
 
 //销量下降
 Route::get('/sales/decline','Erp\SalesController@index');
+Route::get('/sales/declineDetail','Erp\SalesController@show');

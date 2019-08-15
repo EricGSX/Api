@@ -49,7 +49,7 @@
                       <td>@{{ site.itemId }}</td>
                       <td>@{{ site.type }}</td>
                       <td>
-                          <button typt="button" class="btn btn-sm btn-warning" @click="report(site.id)">报表</button>
+                          <button typt="button"  class="btn btn-sm btn-warning" @click="report(site.id)">报表</button>
                           <button typt="button" class="btn btn-sm btn-primary" @click="myFT()">操作</button>
                       </td>
                     </tr>
@@ -57,6 +57,33 @@
                 </table>
           </div>
         </section>
+          {{--模态框--}}
+          <div class="modal fade" tabindex="-1" id="skuHandle" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Modal title</h4>
+              </div>
+              <div class="modal-body">
+                <div class="col-md-12">
+                    <div class="col-md-3">
+                        Lable1
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" v-model="label1">
+                    </div>
+                </div>
+                  <p>Label1绑定后值为：@{{label1}}</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div>
+          {{--模态框--}}
       </div>
     </section>
     <!-- /.content -->
@@ -165,6 +192,8 @@ window.onload=function(){
                 dataLists: msg.msg,
                 chart: null,
                 chart2: null,
+                EricTest: null,
+                label1:'',
             },
             mounted:function(){
                 this.drawLine();
@@ -177,20 +206,21 @@ window.onload=function(){
                         this.chart2.setOption(option2);
                     },
                 myFT:function(){
-                    var test = [
-                        { id: 'Runoob' },
-                        { id: 'Google' },
-                        { id: 'Taobao' }
-                    ];
-                    this.dataLists = test;
+                    this.EricTest = 'Hello World';
+                    $('#skuHandle').modal('show')
+//                    var test = [
+//                        { id: 'Runoob' },
+//                        { id: 'Google' },
+//                        { id: 'Taobao' }
+//                    ];
+//                    this.dataLists = test;
                 },
                 report:function(id){
-                    console.log(id);
-//                    console.log($('#app').html());
-//                    var id = $(ele).parent().parent().children('th').text()
-//                    var sku = $(ele).parent().parent().children('td').eq(0).html()
-//                    var itemId = $(ele).parent().parent().children('td').eq(1).html()
-//                    console.log(itemId)
+//                    console.log(id);
+//                    $.get('/sales/declineDetail',{'id':id},function(re){
+//                        console.log(re)
+//                    })
+                    window.location.href="/sales/declineDetail?id=1";
                 }
             }
         })

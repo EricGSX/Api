@@ -26,4 +26,9 @@ class SalesController extends BaseController
         ];
         return response()->json(['code'=>200,'msg'=>$data]);
     }
+
+    public function show(Request $request)
+    {
+       return view('sales.detail');
+    }
 }

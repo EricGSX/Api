@@ -29,6 +29,6 @@ class SalesController extends BaseController
 
     public function show(Request $request)
     {
-       return view('sales.detail');
+       return view('sales.detail',$request->all());
     }
 }

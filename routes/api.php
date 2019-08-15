@@ -20,4 +20,5 @@ Route::group(['middleware'=>'check_jwt'],function(){
         return 'ok';
     });
     Route::get('/user','User\UserController@test');
+    Route::get('/test','Erp\SalesController@test');
 });

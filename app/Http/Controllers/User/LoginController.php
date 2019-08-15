@@ -52,7 +52,7 @@ class LoginController extends Controller
         return view('users.userdetail');
     }
 
-    public function testApiConnect()
+    public static function testApiConnect(Request $request)
     {
         $api = new Api();
         $result = $api->httpRequest('http://192.168.11.146:888/Home/Test');

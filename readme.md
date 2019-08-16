@@ -12,12 +12,21 @@
 - 数据库表主键 必须 为「id」
 - 数据库表外键 必须 为「resource_id」，如：user_id, post_id
 - 变量名为驼峰
-![](https://cdn.learnku.com/uploads/images/201705/19/1/09GHC72ygP.png)
+
+#### 资源路由示例
+~~~
+GET 	/photos 	index 	photos.index
+GET 	/photos/create 	create 	photos.create
+POST 	/photos 	store 	photos.store
+GET 	/photos/{photo} 	show 	photos.show
+GET 	/photos/{photo}/edit 	edit 	photos.edit
+PUT/PATCH 	/photos/{photo} 	update 	photos.update
+DELETE 	/photos/{photo} 	destroy 	photos.destroy
+~~~
+
 #### 编码规范参考
 ~~~
 https://github.com/php-cpm/clean-code-php
 ~~~
 
-#### 方法规范
-![](https://cdn.learnku.com/uploads/images/201705/19/1/09GHC72ygP.png)
-![avatar](https://cdn.learnku.com/uploads/images/201705/19/1/09GHC72ygP.png)
+#### 

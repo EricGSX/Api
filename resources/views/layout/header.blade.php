@@ -22,8 +22,6 @@
     <!-- jvectormap -->
     <!-- Date Picker -->
   <link rel="stylesheet" href="{{asset('adminlte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
-    <!-- Daterange picker -->
-  <link rel="stylesheet" href="{{asset('adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.css')}}">
     <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="{{asset('adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
 <script src="{{asset('js/jquery-3.4.0.min.js')}}"></script>

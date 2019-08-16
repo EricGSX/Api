@@ -17,3 +17,6 @@
 ~~~
 https://github.com/php-cpm/clean-code-php
 ~~~
+
+#### 方法规范
+![](https://cdn.learnku.com/uploads/images/201705/19/1/09GHC72ygP.png)

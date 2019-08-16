@@ -21,3 +21,6 @@ Route::get('/test','User\LoginController@testApiConnect');
 //销量下降
 Route::get('/sales/decline','Erp\SalesController@index');
 Route::get('/sales/declineDetail','Erp\SalesController@show');
+//权限分配
+Route::get('/roles','Erp\RolesController@index');
+Route::get('/roles/create','Erp\RolesController@create');

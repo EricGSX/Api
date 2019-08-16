@@ -1,5 +1,7 @@
 @extends('layout.main')
 @section('main-content')
+    <link rel="stylesheet" href="{{asset('css/bootstrap-select.css')}}">
+    <script src="{{asset('js/bootstrap-select.js')}}"></script>
     <style>
                 [v-cloak]{
                     display: none;
@@ -24,7 +26,7 @@
               <form class="form-inline" style="padding:10px 0px 10px 10px;">
                   <div class="form-group col-md-2">
                     <label style="width: 20%;">User</label>
-                    <select class="form-control" v-model="username" style="width: 70%;"  v-cloak>
+                    <select class="form-control selectpicker"  data-live-search="true" v-model="username" style="width: 70%;"  v-cloak>
                         <option>Eric.Guo1</option>
                         <option>Eric.Guo2</option>
                         <option>Eric.Guo3</option>
@@ -77,7 +79,7 @@
     <!-- /.content -->
   </div>
 <script>
-window.onload=function(){
+//window.onload=function(){
     var vm = new Vue({
         el:'#app',
         data:{
@@ -92,6 +94,6 @@ window.onload=function(){
             }
         }
     })
-}
+//}
 </script>
 @endsection

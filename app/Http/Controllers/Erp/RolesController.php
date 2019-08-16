@@ -16,4 +16,9 @@ class RolesController extends BaseController
     {
         return view('roles.create');
     }
+
+    public function test2()
+    {
+        return view('demo2');
+    }
 }

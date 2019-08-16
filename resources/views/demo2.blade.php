@@ -6,7 +6,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Dashboard
+        Roles List
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
@@ -15,7 +15,7 @@
       </ol>
     </section>
     <section class="content">
-      <div class="row">
+       <div class="row">
         <section class="col-lg-12 connectedSortable">
           <div class="nav-tabs-custom">
               <p id="userinfo" class="Graph">123</p>
@@ -26,11 +26,6 @@
   <option data-tokens="frosting">Sugar, Spice and all things nice</option>
 </select>
 
-                    <select class="formselectpicker" data-live-search="true" v-model="username2" style="width: 70%;"   v-cloak>
-                        <option>Eric.Guo1</option>
-                        <option>Eric.Guo2</option>
-                        <option>Eric.Guo3</option>
-                    </select>
 
 
 </div>
@@ -40,8 +35,8 @@
     </section>
     <!-- /.content -->
   </div>
-<script>
-	new Vue({
+    <script>
+    new Vue({
         el: '#app',
         data: {
             message: 'Hello Vue.js!',

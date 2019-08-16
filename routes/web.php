@@ -16,6 +16,8 @@ Route::get('/users', 'User\LoginController@index');
 Route::get('/users/1','User\LoginController@show');
 Route::get('/test','User\LoginController@testApiConnect');
 
+Route::get('/test2','Erp\RolesController@test2');
+
 //后台页面入口
 
 //销量下降

@@ -12,3 +12,8 @@
 - 数据库表主键 必须 为「id」
 - 数据库表外键 必须 为「resource_id」，如：user_id, post_id
 - 变量名为驼峰
+
+#### 编码规范参考
+~~~
+https://github.com/php-cpm/clean-code-php
+~~~

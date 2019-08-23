@@ -34,36 +34,20 @@
                   </div>
                   <button type="button" class="btn btn-primary btn-sm" @click="assinRole()">Search</button>
               </form>
-                  <p>Roles Lists:</p>
+                  <p>Roles Lists:{{$users}}</p>
                   <div id="roleLists">
+                      @foreach ($roles as $role)
                         <ul class="list-group">
-                          <li class="list-group-item list-group-item-success">权限控制</li>
+                          <li class="list-group-item list-group-item-success">{{$role['name']}}</li>
                           <li class="list-group-item ">
+                              @foreach($role['content'] as $action)
                                <label class="checkbox-inline">
-                                  <input type="checkbox" id="inlineCheckbox1" value="option1" v-model="checkedRoles"> 新增权限
+                                  <input type="checkbox" id="inlineCheckbox1" value="{{$action['content']}}" v-model="checkedRoles"> {{$action['name']}}
                                 </label>
-                                <label class="checkbox-inline">
-                                  <input type="checkbox" id="inlineCheckbox2" value="option2" v-model="checkedRoles"> 权限管理
-                                </label>
-                                <label class="checkbox-inline">
-                                  <input type="checkbox" id="inlineCheckbox3" value="option3" v-model="checkedRoles"> 用户授权
-                                </label>
+                               @endforeach
                           </li>
                         </ul>
-                        <ul class="list-group">
-                          <li class="list-group-item list-group-item-success">销量下降</li>
-                          <li class="list-group-item ">
-                               <label class="checkbox-inline">
-                                  <input type="checkbox" id="inlineCheckbox4" value="option4" v-model="checkedRoles"> 列表数据
-                                </label>
-                                <label class="checkbox-inline">
-                                  <input type="checkbox" id="inlineCheckbox5" value="option5" v-model="checkedRoles"> 展示报表
-                                </label>
-                                <label class="checkbox-inline">
-                                  <input type="checkbox" id="inlineCheckbox6" value="option6" v-model="checkedRoles"> 数据修改
-                                </label>
-                          </li>
-                        </ul>
+                      @endforeach
                   </div>
                  <p v-cloak>当前选择用户为：@{{username}}</p>
                  <p v-cloak>当前选择值为：@{{checkedRoles}}</p>
@@ -80,17 +64,20 @@
   </div>
 <script>
 //window.onload=function(){
+var cache = [];
     var vm = new Vue({
         el:'#app',
         data:{
             checkedRoles:[],
             username:null,
+            roles:[],
+//            roleLists:[{"name":"aaa","content":[{"name":"aaa","content":"addrole"},{"name":"aaa","content":"update"}]},{"name":"aaa","content":[{"name":"aaa","content":"addrole2"},{"name":"aaa","content":"update2"}]}],
         },
         mounted:function(){
         },
         methods:{
             assinRole:function(){
-
+                window.location.href="/roles?user=eric.guo";
             }
         }
     })

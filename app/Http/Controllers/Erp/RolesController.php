@@ -7,9 +7,20 @@ use App\Http\Controllers\BaseController;
 
 class RolesController extends BaseController
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('roles.index');
+        $users = $request->user;
+        $roles = [
+            [
+                'name' => '销量下降',
+                'content' => [['name' => '列表1', 'content' => 'addrole'],['name' => '列表2', 'content' => 'update']],
+            ],
+            [
+                'name' => 'aaa',
+                'content' => [['name' => '列表3', 'content' => 'addrole2'],['name' => '列表4', 'content' => 'update2']],
+            ],
+        ];
+        return view('roles.index',compact('users','roles'));
     }
 
     public function create()
@@ -21,4 +32,5 @@ class RolesController extends BaseController
     {
         return view('demo2');
     }
+
 }

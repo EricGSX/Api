@@ -5,12 +5,16 @@ namespace App\Http\Controllers\Erp;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use App\Libs\Api;
+use Illuminate\Support\Facades\DB;
 
 class SalesController extends BaseController
 {
     public function index()
     {
         //session::set
+        //$test = DB::connection('sqlsrv')->table('oc_user_info')->where('id','eric.guo')->get();
+        //$test = DB::connection('sqlsrv')->select('select top 1 * from oc_user_info');
+        //dd($test);
         return view('sales.index');
     }
 

@@ -21,6 +21,7 @@
     </section>
     <section class="content">
       <div class="row" id="app">
+      @include('layout.error')
         <section class="  connectedSortable">
           <div class="nav-tabs-custom">
               <form class="form-inline" method='get' style="padding:10px 0px 10px 10px;">
@@ -37,32 +38,53 @@
                         @endforeach
                     </select>
                   </div>
-                  <button type="button" class="btn btn-primary btn-sm" @click="assinRole()">Search</button>
+                  <button type="button" class="btn btn-primary btn-sm" @click="searchUser()">Search</button>
               </form>
               <p><b> </b></p>
+              <form method='POST' action="/roles/assign">
+                  @if($users)
                   <div id="roleLists">
-                      @foreach ($roles as $role)
-                        <ul class="list-group">
-                          <li class="list-group-item list-group-item-success">{{$role['name']}}</li>
+                      {{csrf_field()}}
+                      <input type="hidden" name="rolesUser" value="{{$users}}">
+                      @foreach ($allModules as $module)
+                          <ul class="list-group">
+                          <li class="list-group-item list-group-item-success">{{$module->display_name}}</li>
                           <li class="list-group-item ">
-                              @foreach($role['content'] as $action)
-                               <label class="checkbox-inline">
-                                  <input type="checkbox" id="inlineCheckbox1" value="{{$action['content']}}" v-model="checkedRoles"> {{$action['name']}}
-                                </label>
-                               @endforeach
+                              @foreach($allActions as $key=>$action)
+                                  @if($key == $module->display_name)
+                                      @foreach($action as $ac)
+                                          @if($ac['action_name'] != null)
+                                              <label class="checkbox-inline">
+                                                  @if(in_array($ac['modules_name'].'-' . $ac['action_name'],$userRoles))
+                                                   <input type="checkbox" value="{{$ac['modules_name'].'-' . $ac['action_name']}}" name="checkedRoles[]" checked="checked">
+                                                  @else
+                                                   <input type="checkbox" value="{{$ac['modules_name'].'-' . $ac['action_name']}}" name="checkedRoles[]">
+                                                  @endif
+                                              {{$ac['action_display_name']}}
+                                          </label>
+                                          @endif
+                                      @endforeach
+                                  @endif
+                              @endforeach
                           </li>
                         </ul>
                       @endforeach
                   </div>
-              <p v-cloak>当前选择用户为：<b>@{{username}}</b></p>
-              <p v-cloak>当前选择值为：<b>@{{checkedRoles}}</b></p>
               <p style="float: right;padding-bottom: 10px;">
-                  <button class="btn btn-primary" >Save Roles</button>
+                  <button class="btn btn-primary" type="submit">Save Roles</button>
               </p>
-
+                  @endif
+            </form>
           </div>
         </section>
-
+       <section class="col-lg-12 connectedSortable">
+          <div class="nav-tabs-custom">
+              <p style="font-weight: bold;padding: 10px;">使用说明：</p>
+              <p>1、下拉框可搜索选中待操作用户信息</p>
+              <p>2、如有疑问请联系管理员Will/Mungo/Eric</p>
+              <p style="height: 10px;"></p>
+          </div>
+        </section>
       </div>
     </section>
     <!-- /.content -->
@@ -73,19 +95,15 @@ var cache = [];
     var vm = new Vue({
         el:'#app',
         data:{
-            checkedRoles:[],
-            username:'{{$users}}',
-            roles:[],
-//            roleLists:[{"name":"aaa","content":[{"name":"aaa","content":"addrole"},{"name":"aaa","content":"update"}]},{"name":"aaa","content":[{"name":"aaa","content":"addrole2"},{"name":"aaa","content":"update2"}]}],
         },
         mounted:function(){
         },
         methods:{
-            assinRole:function(){
+            searchUser:function(){
                 var nowUser = $('#allUsers').val();
                 var hrefUrl = '/roles?user=' + nowUser;
                 window.location.href=hrefUrl;
-            }
+            },
         }
     })
 //}

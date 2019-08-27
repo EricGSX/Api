@@ -7,28 +7,28 @@ use App\Http\Controllers\BaseController;
 use Illuminate\Support\Facades\DB;
 use \App\Model\Modules;
 use \App\Model\Actions;
+use \App\Model\Configs;
+use \App\Model\UserRoles;
 
 class RolesController extends BaseController
 {
     public function index(Request $request)
     {
         $users = $request->user;
+        $userRoles = [];
         if(!$users){
-            $roles = [];
+            $allActions = [];
         }else{
-            $roles = [
-                [
-                    'name' => '销量下降',
-                    'content' => [['name' => '列表1', 'content' => 'addrole'],['name' => '列表2', 'content' => 'update']],
-                ],
-                [
-                    'name' => 'aaa',
-                    'content' => [['name' => '列表3', 'content' => 'addrole2'],['name' => '列表4', 'content' => 'update2']],
-                ],
-            ];
+            $configsCache = Configs::where('type','RolesList')->firstOrFail();
+            $allActions = json_decode($configsCache->content,true);
+            $userRolesObj = UserRoles::where('username',$users)->first();
+            if($userRolesObj){
+                $userRoles = explode(';',$userRolesObj->modules_actions);
+            }
         }
+        $allModules = Modules::all();
         $allUsers = DB::connection('sqlsrv')->select("SELECT id FROM [OceaniaERP].[dbo].[OC_User_Info] where status <> '-1'");
-        return view('roles.index',compact('users','roles','allUsers'));
+        return view('roles.index',compact('users','allActions','allUsers','allModules','userRoles'));
     }
 
     public function create()
@@ -64,11 +64,14 @@ class RolesController extends BaseController
             $displayArr = explode(';',$request->display_names);
             $actionsarr = explode(';',$request->actions_names);
             $actions = [];
+            $nowDate = date('Y-m-d H:i:s',time());
             foreach($displayArr as $key=>$value){
                 $actions[] = [
                     'modules_id'    => $modulesId,
                     'display_name'  => $value,
                     'actions_name'  => $actionsarr[$key],
+                    'created_at'    => $nowDate,
+                    'updated_at'    => $nowDate,
                 ];
             }
             DB::table('actions')->insert($actions);
@@ -79,29 +82,34 @@ class RolesController extends BaseController
 
     }
 
-    public function test2()
+
+    public function assignRoles(Request $request)
     {
-        return view('demo2');
+        $request->validate([
+            'rolesUser' => 'required|string',
+            'checkedRoles' => 'required|array'
+                           ]);
+        $rolesContent = implode(';',$request->checkedRoles);
+        $rolesUser = $request->rolesUser;
+        UserRoles::updateOrCreate(['username'=>$rolesUser],['modules_actions'=>$rolesContent]);
+        return redirect("/roles?user=$rolesUser");
     }
 
-    public function assignRoles()
+    public function roleLists()
     {
-
-    }
-
-    public function rolelists()
-    {
+        $configsCache = Configs::where('type','RolesList')->first();
         $allModules = Modules::all();
-        $allActions = DB::table('modules')
-            ->leftJoin('actions','modules.id','=','actions.modules_id')
-            ->select('modules.display_name as m_display_name','modules.modules_name as m_code_name','actions.display_name as a_display_name','actions.actions_name as a_code_name')
-            ->get();
+        if($configsCache){
+            $allActions = json_decode($configsCache->content,true);
+        }else{
+            $allActions = DB::table('modules')
+                ->leftJoin('actions','modules.id','=','actions.modules_id')
+                ->select('modules.display_name as module_display_name','modules.modules_name as modules_name','actions.display_name as action_display_name','actions.actions_name as action_name')
+                ->get()->toarray();
+        }
         return view('roles.list',compact('allModules','allActions'));
     }
 
-    public function tree()
-    {
 
-    }
 
 }

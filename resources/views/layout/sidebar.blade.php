@@ -56,13 +56,35 @@
               @else
                       <li><a href="/roles/create"><i class="fa fa-circle-o"></i> Create Roles Modules</a></li>
               @endif
-              @if($actionName=='rolelists')
+              @if($actionName=='roleLists')
                   <li class="active"><a href="/roles/list"><i class="fa fa-circle-o text-red"></i>Roles List</a></li>
               @else
                   <li><a href="/roles/list"><i class="fa fa-circle-o"></i> Roles List</a></li>
               @endif
+
           </ul>
         </li>
+                  {{--Configs Cache--}}
+                  @if($controllerName == 'ConfigsController')
+                      <li class="treeview active">
+                  @else
+                      <li class="treeview">
+        @endif
+                          <a href="#">
+            <i class="fa  fa-object-ungroup"></i> <span>配置缓存</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+              @if($actionName == 'index')
+                  <li class="active"><a href="/configs"><i class="fa fa-circle-o text-red"></i> Cache List</a></li>
+              @else
+                  <li><a href="/configs"><i class="fa fa-circle-o"></i> Cache List</a></li>
+              @endif
+          </ul>
+        </li>
+             {{----}}
         <li><a onclick="alert('敬请期待哦')"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
         <li class="header">LABELS</li>
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>

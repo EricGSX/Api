@@ -23,18 +23,21 @@
       <div class="row" id="app">
         <section class="  connectedSortable">
           <div class="nav-tabs-custom">
-              <p><b> </b></p>
+              <p><b></b></p>
                   <div id="roleLists">
                       @foreach ($allModules as $module)
                           <ul class="list-group">
                           <li class="list-group-item list-group-item-success">{{$module->display_name}}</li>
                           <li class="list-group-item ">
-                              @foreach($allActions as $action)
-                                  @if($action->m_code_name == $module->modules_name && $action->a_code_name != null)
-                                  <label class="checkbox-inline">
-                                  {{--<input type="checkbox" id="inlineCheckbox1" value="{{$action->a_code_name}}" v-model="checkedRoles"> --}}
-                                      {{$action->a_display_name}}({{$action->m_code_name}}-{{$action->a_code_name}})
-                                  </label>
+                              @foreach($allActions as $key=>$action)
+                                  @if($key == $module->display_name)
+                                      @foreach($action as $ac)
+                                          @if($ac['action_name'] != null)
+                                          <label class="checkbox-inline">
+                                              {{$ac['action_display_name']}}({{$ac['modules_name']}}-{{$ac['action_name']}})
+                                          </label>
+                                          @endif
+                                      @endforeach
                                   @endif
                               @endforeach
                           </li>

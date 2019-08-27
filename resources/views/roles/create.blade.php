@@ -88,7 +88,7 @@
           <div class="nav-tabs-custom">
               <p style="font-weight: bold;padding: 10px;">使用说明：</p>
               <p>1、新增模块请先填写模块在增加方法</p>
-              <p>2、增加Action可同时添加多个，并以英文分号分隔开</p>
+              <p>2、增加Action可同时添加多个，并以英文分号分隔开(结尾请勿在使永分号分隔)</p>
               <p style="height: 10px;"></p>
           </div>
         </section>

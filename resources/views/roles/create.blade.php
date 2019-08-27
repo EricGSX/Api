@@ -13,20 +13,23 @@
     </section>
     <section class="content">
       <div class="row">
-        <section class="col-lg-6 connectedSortable">
+          @include('layout.error')
+          <section class="col-lg-6 connectedSortable">
           <div class="nav-tabs-custom">
               <p style="font-weight: bold;padding: 10px;">Add Modules</p>
-              <form class="form-horizontal">
+              <form class="form-horizontal" method="post" action='/roles/create'>
+                  {{csrf_field()}}
+                  <input type="hidden" name="modules_type" value="modules">
                   <div class="form-group">
                     <label for="inputPassword3" class="col-sm-2 control-label">模块名</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" placeholder="销量下降">
+                      <input type="text" class="form-control" name="display_name" placeholder="eg:销量下降" value='{{old('display_name')}}'>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputPassword3" class="col-sm-2 control-label">模块方法</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" placeholder="SalesController">
+                      <input type="text" class="form-control" name="modules_name" placeholder="SalesController" value="{{old('modules_name')}}">
                     </div>
                   </div>
                   <div class="form-group">
@@ -42,26 +45,34 @@
         <section class="col-lg-6 connectedSortable">
           <div class="nav-tabs-custom">
               <p style="font-weight: bold;padding: 10px;">Add Actions</p>
-              <form class="form-horizontal">
+              <form class="form-horizontal" method="post" action='/roles/create'>
+                  {{csrf_field()}}
+                  <input type="hidden" name="modules_type" value="actions">
                   <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">所处模块</label>
                     <div class="col-sm-10">
-                      <select class="form-control">
-                          <option>权限控制</option>
-                          <option>销量下降</option>
+                      <select class="form-control" name="modules_id">
+                          <option>---请选择模块---</option>
+                          @foreach($modules as $module)
+                              @if(old('modules_id') == $module->id)
+                                  <option value="{{$module->id}}" selected="selected">{{$module->display_name}}</option>
+                              @else
+                                  <option value="{{$module->id}}">{{$module->display_name}}</option>
+                              @endif
+                          @endforeach
                       </select>
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputPassword3" class="col-sm-2 control-label">方法名</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" placeholder="列表数据;展示报表;数据修改">
+                      <input type="text" class="form-control" placeholder="列表数据;展示报表;数据修改" name="display_names" value="{{ old('display_names') }}">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputPassword3" class="col-sm-2 control-label">函数名</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" placeholder="index;show;update">
+                      <input type="text" class="form-control" placeholder="index;show;update" name="actions_names" value="{{old('actions_names')}}">
                     </div>
                   </div>
                   <div class="form-group">

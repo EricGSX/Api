@@ -26,4 +26,6 @@ Route::get('/sales/declineDetail','Erp\SalesController@show');
 //权限分配
 Route::get('/roles','Erp\RolesController@index');
 Route::get('/roles/create','Erp\RolesController@create');
-Route::get('/roles/user','Erp\RolesController@rolelists');
+Route::post('/roles/create','Erp\RolesController@store');
+Route::get('/roles/list','Erp\RolesController@rolelists');
+Route::get('/roles/tree','Erp\RolesController@tree');

@@ -46,15 +46,20 @@
           </a>
           <ul class="treeview-menu">
               @if($actionName=='index')
-                  <li class="active"><a href="/roles"><i class="fa fa-circle-o text-red"></i> Index</a></li>
+                  <li class="active"><a href="/roles"><i class="fa fa-circle-o text-red"></i>Assin Roles</a></li>
               @else
-                  <li><a href="/roles"><i class="fa fa-circle-o"></i> Index</a></li>
+                  <li><a href="/roles"><i class="fa fa-circle-o"></i> Assin Roles</a></li>
               @endif
 
               @if($actionName=='create')
-                      <li class="active"><a href="/roles/create"><i class="fa fa-circle-o text-red"></i> Create</a></li>
+                      <li class="active"><a href="/roles/create"><i class="fa fa-circle-o text-red"></i> Create Roles Modules</a></li>
               @else
-                      <li><a href="/roles/create"><i class="fa fa-circle-o"></i> Create Action</a></li>
+                      <li><a href="/roles/create"><i class="fa fa-circle-o"></i> Create Roles Modules</a></li>
+              @endif
+              @if($actionName=='rolelists')
+                  <li class="active"><a href="/roles/list"><i class="fa fa-circle-o text-red"></i>Roles List</a></li>
+              @else
+                  <li><a href="/roles/list"><i class="fa fa-circle-o"></i> Roles List</a></li>
               @endif
           </ul>
         </li>

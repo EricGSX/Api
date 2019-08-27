@@ -352,7 +352,7 @@ window.jQuery || document.write(unescape("%3Cscript src='https://ajax.aspnetcdn.
             console.log(data);
             if(data.code == 200){
                 localStorage.setItem("AuthToken", data.token);
-                window.location.href = '/users/1';
+                window.location.href = '/users/1?token='+data.token;
             }else{
                 alert(data.msg);
             }

@@ -15,6 +15,7 @@ class ConfigsController extends BaseController
     public function rolesTree()
     {
         try{
+            BaseController::webAuthTokenCheck();
             $allModules = Modules::all();
             $allActions = DB::table('modules')
                 ->leftJoin('actions','modules.id','=','actions.modules_id')
@@ -42,8 +43,14 @@ class ConfigsController extends BaseController
         }
     }
 
+    /**
+     * 缓存列表页面
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
+        BaseController::webAuthTokenCheck();
         return view('configs.index');
     }
 }

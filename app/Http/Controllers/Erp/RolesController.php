@@ -12,8 +12,15 @@ use \App\Model\UserRoles;
 
 class RolesController extends BaseController
 {
+    /**
+     * 用户授权页面
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(Request $request)
     {
+        BaseController::webAuthTokenCheck();
         $users = $request->user;
         $userRoles = [];
         if(!$users){
@@ -31,15 +38,28 @@ class RolesController extends BaseController
         return view('roles.index',compact('users','allActions','allUsers','allModules','userRoles'));
     }
 
+    /**
+     * 新增权限页面
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
+        BaseController::webAuthTokenCheck();
         $modules = Modules::all();
 
         return view('roles.create',compact('modules'));
     }
 
+    /**
+     * 新增模块
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|void
+     */
     public function store(Request $request)
     {
+        BaseController::webAuthTokenCheck();
         $request->validate([
             'modules_type' => 'required'
                           ],
@@ -82,9 +102,15 @@ class RolesController extends BaseController
 
     }
 
-
+    /**
+     * 用户授权
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|void
+     */
     public function assignRoles(Request $request)
     {
+        BaseController::webAuthTokenCheck();
         $request->validate([
             'rolesUser' => 'required|string',
             'checkedRoles' => 'required|array'
@@ -95,8 +121,14 @@ class RolesController extends BaseController
         return redirect("/roles?user=$rolesUser");
     }
 
+    /**
+     * 权限列表
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function roleLists()
     {
+        BaseController::webAuthTokenCheck();
         $configsCache = Configs::where('type','RolesList')->first();
         $allModules = Modules::all();
         if($configsCache){

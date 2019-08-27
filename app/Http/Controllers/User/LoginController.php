@@ -31,6 +31,8 @@ class LoginController extends Controller
                     'iat'  => time(),
                     'exp'  => time() + 3600
                 ];
+                session()->put('username','eric.guo');
+                session()->save();
                 $token=$jwt->getToken($payLoad);
                 return response()->json(['code' => 200, 'token'=> $token]);
             }else{
@@ -47,8 +49,15 @@ class LoginController extends Controller
         return view('users.login');
     }
 
-    public function show()
+    public function show(Request $request)
     {
+        if(!$request->token){
+            return redirect('/roles/list');
+        }
+        $authToken = $request->token;
+        session()->put('AuthToken',$authToken);
+        session()->save();
+        \App\Http\Controllers\BaseController::webAuthTokenCheck();
         return view('users.userdetail');
     }
 

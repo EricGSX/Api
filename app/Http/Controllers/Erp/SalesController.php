@@ -11,6 +11,7 @@ class SalesController extends BaseController
 {
     public function index()
     {
+        BaseController::webAuthTokenCheck();
         //session::set
         //$test = DB::connection('sqlsrv')->table('oc_user_info')->where('id','eric.guo')->get();
         //$test = DB::connection('sqlsrv')->select('select top 1 * from oc_user_info');

@@ -13,7 +13,7 @@
 Route::group(['middleware'=>['web']],function(){
     // 前台页面路由入口
     Route::get('/', 'User\LoginController@index');
-    Route::get('/login', 'User\LoginController@index');
+    Route::get('/erp', 'User\LoginController@index');
     Route::get('/users/1','User\LoginController@show');
     Route::get('/test','User\LoginController@testApiConnect');
 

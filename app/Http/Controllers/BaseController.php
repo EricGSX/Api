@@ -20,6 +20,11 @@ class BaseController extends Controller
         }
     }
 
+    /**
+     * 验证非接口传递的数据流合法性
+     *
+     * @return bool|void
+     */
     public static function webAuthTokenCheck()
     {
         $action = \Route::current()->getActionName();
@@ -27,14 +32,16 @@ class BaseController extends Controller
         $controller = substr(strrchr($controller,'\\'),1);
         $authToken = session('AuthToken');
         if(!$authToken){
-            return redirect('/roles/list');
+            redirect('/erp')->send();
+            return;
         }
         $currentAction = $controller . '-' . $action;
         $jwt = new GuoJwt(env('APP_KEY'));
         $payLoad = json_decode($jwt->verifyToken($authToken),TRUE);
         if($payLoad['code'] != 200){
             echo '<b style="color:red;font-weight: bold;">' . $payLoad['msg'] . '</b>';
-            return;
+            echo '<p style="color:red;font-weight: bold;"><a href="/erp">Login</a></p>';
+            die;
         }
         $users = $payLoad['msg']['name'];
         $userRolesObj = UserRoles::where('username',$users)->first();
@@ -42,10 +49,10 @@ class BaseController extends Controller
         if($userRolesObj){
             $userRoles = $userRolesObj->modules_actions;
         }
-        $userRoles .= 'LoginController-show;';
+        $userRoles .= ';LoginController-show;';
         if(!strstr($userRoles,$currentAction)){
             echo '<b style="color:red;font-weight: bold;">The current user does not have the right to change the operation, please contact the administrator Will/Mungo/Eric</b>';
-            return;
+            die;
         }
         session()->put('userRolesList',$userRoles);
         session()->save();

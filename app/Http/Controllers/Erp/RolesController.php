@@ -47,7 +47,6 @@ class RolesController extends BaseController
     {
         BaseController::webAuthTokenCheck();
         $modules = Modules::all();
-
         return view('roles.create',compact('modules'));
     }
 

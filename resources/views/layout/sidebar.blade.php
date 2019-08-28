@@ -4,12 +4,19 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="{{asset('adminlte/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+          <img src="{{asset('img/ic_user.jpeg')}}" class="img-circle" alt="User Image">
         </div>
-        <div class="pull-left info">
-          <p>Eric Guo</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-        </div>
+          @if(session('username'))
+            <div class="pull-left info">
+              <p>{{session('username')}}</p>
+              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+          @else
+              <div class="pull-left info">
+              <a href="/erp"><i class="fa fa-circle text-danger"></i> Offline</a>
+              <a href="/erp"><i class="fa fa-circle text-danger"></i>Please Login</a>
+            </div>
+          @endif
       </div>
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">

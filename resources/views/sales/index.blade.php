@@ -13,8 +13,9 @@
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Sales Index</li>
+        {{--<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>--}}
+        {{--<li class="active">销量下降</li>--}}
+        {{--<li class="active">Sales Index</li>--}}
       </ol>
     </section>
     <section class="content">

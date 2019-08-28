@@ -55,6 +55,7 @@ class BaseController extends Controller
             die;
         }
         session()->put('userRolesList',$userRoles);
+        session()->put('username',$users);
         session()->save();
         return true;
     }

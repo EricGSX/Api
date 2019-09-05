@@ -252,7 +252,7 @@
                   {{--<a href="#" class="btn btn-default btn-flat">Profile</a>--}}
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-danger btn-sm btn-flat">Sign out</a>
+                  <button class="btn btn-danger btn-sm btn-flat" onclick="signOut()">Sign out</button>
                 </div>
               </li>
             </ul>
@@ -260,4 +260,12 @@
         </ul>
       </div>
     </nav>
+  <script>
+    function signOut(){
+        localStorage.setItem("AuthToken", null);
+        $.get('/logout',function(){
+            window.location.href = '/';
+        });
+    }
+  </script>
   </header>

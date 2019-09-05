@@ -16,7 +16,7 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('/erp', 'User\LoginController@index');
     Route::get('/users/1','User\LoginController@show');
     Route::get('/test','User\LoginController@testApiConnect');
-
+    Route::get('/logout','User\LoginController@logout');
 
     //后台页面入口
 

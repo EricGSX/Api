@@ -29,7 +29,7 @@ class LoginController extends Controller
                     'email'=> 'eric.guo@oceania-inc.com',
                     'role' => 'administrator',
                     'iat'  => time(),
-                    'exp'  => time() + 3600
+                    'exp'  => time() + 36000
                 ];
                 session()->put('username','eric.guo');
                 session()->save();
@@ -66,5 +66,12 @@ class LoginController extends Controller
         $api = new Api();
         $result = $api->httpRequest('http://192.168.11.146:888/Home/Test');
         dd($result);
+    }
+
+
+    public function logout()
+    {
+        session()->flush();
+        echo 'success';
     }
 }

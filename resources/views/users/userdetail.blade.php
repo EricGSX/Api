@@ -13,7 +13,7 @@
     </section>
     <section class="content">
       <div class="row">
-        <section class="col-lg-7 connectedSortable">
+        <section class="col-lg-12 connectedSortable">
           <div class="nav-tabs-custom">
               <p id="userinfo" class="Graph"></p>
           </div>

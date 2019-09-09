@@ -6,9 +6,9 @@
         <div class="pull-left image">
           <img src="{{asset('img/ic_user.jpeg')}}" class="img-circle" alt="User Image">
         </div>
-          @if(session('username'))
+          @if(session('payLoad')['displayName'])
             <div class="pull-left info">
-              <p>{{session('username')}}</p>
+              <p>{{session('payLoad')['displayName']}}</p>
               <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
           @else

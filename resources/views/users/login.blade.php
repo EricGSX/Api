@@ -59,6 +59,18 @@ window.jQuery || document.write(unescape("%3Cscript src='https://ajax.aspnetcdn.
             font-family: "neo";
             transition: .25s;
         }
+        .btn2{
+            width:140px;
+            height: 40px;
+            border: 1px solid #fff;
+            background: none;
+            font-size:20px;
+            color: #fff;
+            cursor: pointer;
+            margin-top: 25px;
+            font-family: "neo";
+            transition: .25s;
+        }
         .btn:hover{
             background: rgba(255,255,255,.25);
         }
@@ -304,11 +316,10 @@ window.jQuery || document.write(unescape("%3Cscript src='https://ajax.aspnetcdn.
                     <form action="post">
                         <p class="form"><input type="text" id="user" placeholder="username" autocomplete="off"></p>
                         <p class="form"><input type="password" id="passwd" placeholder="password" autocomplete="off"></p>
-                        {{--<p class="form confirm"><input type="password" id="confirm-passwd" placeholder="confirm password"></p>--}}
-                        <input type="button" value="Log in" class="btn" onclick="login()" style="margin-right: 20px;">
-                        {{--<input type="button" value="Sign in" class="btn" onclick='signin()' id="btn">--}}
+                        <input type="button" value="Log in" class="btn" onclick="login()" id="loginBtn" style="margin-right: 20px;">
+                        <button class="btn2" id="loginBtn2" style="display: none;" disabled="disabled">Login......</button>
                     </form>
-                    <a href="#">Forget your password?</a>
+                    {{--<a href="#">Forget your password?</a>--}}
                 </span>
             </div>
 
@@ -348,11 +359,23 @@ window.jQuery || document.write(unescape("%3Cscript src='https://ajax.aspnetcdn.
 
     //登录按钮
     function login() {
-        $.post('/api/login',{},function(data){
+        var username = $('#user').val();
+        var password = $('#passwd').val();
+        if(typeof(username) == 'underfined' || username==''){
+            alert('The user name cannot be empty');
+            return;
+        }
+        if(typeof(password) == 'underfined' || password==''){
+            alert('The Password cannot be empty');
+            return;
+        }
+        $('#loginBtn').hide();
+        $('#loginBtn2').show();
+        $.post('/api/login',{'UserName':username,'Password':password},function(data){
             console.log(data);
             if(data.code == 200){
                 localStorage.setItem("AuthToken", data.token);
-                window.location.href = '/users/1?token='+data.token;
+                window.location.href = '/users?token='+data.token;
             }else{
                 alert(data.msg);
             }

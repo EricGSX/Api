@@ -219,16 +219,18 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="{{asset('img/ic_user.jpeg')}}" class="user-image" alt="User Image">
-              <span class="hidden-xs">{{session('username')}}</span>
+              <span class="hidden-xs">{{session('payLoad')['displayName']}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
-              <li class="user-header">
+              <li class="user-header" style="height:190px;">
                 <img src="{{asset('img/ic_user.jpeg')}}" class="img-circle" alt="User Image">
 
                 <p>
-                  {{session('username')}}
-                  <small> - </small>
+                  {{session('payLoad')['displayName']}}
+                  <small> {{session('payLoad')['department']}} </small>
+                  <small>Login Date: {{date('Y-m-d H:i:s',session('payLoad')['iat'])}} </small>
+                  <small>Deadline: {{date('Y-m-d H:i:s',session('payLoad')['exp'])}} </small>
                 </p>
               </li>
               <!-- Menu Body -->

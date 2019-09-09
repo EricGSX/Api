@@ -17,22 +17,33 @@ use App\Libs\Api;
  */
 class LoginController extends Controller
 {
-    public function login()
+
+    /**
+     * 用户登录及生成对应Token
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function login(Request $request)
     {
         try{
             $key = env('APP_KEY');
             $jwt = new GuoJwt($key);
             $api = new Api();
-            if(true){
+            $userDataJson = $api->httpRequest('http://192.168.11.49/DataCenter/Account/Login',$request->all());
+            $userData = json_decode($userDataJson,TRUE);
+            if($userData){
+                $allRoles = array_column($userData['Roles'],'ID');
                 $payLoad = [
-                    'name' => 'eric.guo',
-                    'email'=> 'eric.guo@oceania-inc.com',
-                    'role' => 'administrator',
-                    'iat'  => time(),
-                    'exp'  => time() + 36000
+                    'accountName' => $userData['AccountName'],
+                    'displayName' => $userData['DisplayName'],
+                    'email'       => $userData['DisplayName'],
+                    'legalName'   => $userData['LegalName'],
+                    'department'  => $userData['Department'],
+                    'role'        => implode(',',$allRoles),
+                    'iat'         => time(),
+                    'exp'         => time() + 36000
                 ];
-                session()->put('username','eric.guo');
-                session()->save();
                 $token=$jwt->getToken($payLoad);
                 return response()->json(['code' => 200, 'token'=> $token]);
             }else{
@@ -44,11 +55,22 @@ class LoginController extends Controller
         }
     }
 
+    /**
+     * 登录页面
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         return view('users.login');
     }
 
+    /**
+     * 后台首页
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View|void
+     */
     public function show(Request $request)
     {
         if(!$request->token){
@@ -61,14 +83,9 @@ class LoginController extends Controller
         return view('users.userdetail');
     }
 
-    public static function testApiConnect(Request $request)
-    {
-        $api = new Api();
-        $result = $api->httpRequest('http://192.168.11.146:888/Home/Test');
-        dd($result);
-    }
-
-
+    /**
+     * 用户登出
+     */
     public function logout()
     {
         session()->flush();

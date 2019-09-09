@@ -43,7 +43,7 @@ class BaseController extends Controller
             echo '<p style="color:red;font-weight: bold;"><a href="/erp">Login</a></p>';
             die;
         }
-        $users = $payLoad['msg']['name'];
+        $users = $payLoad['msg']['accountName'];
         $userRolesObj = UserRoles::where('username',$users)->first();
         $userRoles = '';
         if($userRolesObj){
@@ -54,8 +54,8 @@ class BaseController extends Controller
             echo '<b style="color:red;font-weight: bold;">The current user does not have the right to change the operation, please contact the administrator Will/Mungo/Eric</b>';
             die;
         }
+        session()->put('payLoad',$payLoad['msg']);
         session()->put('userRolesList',$userRoles);
-        session()->put('username',$users);
         session()->save();
         return true;
     }

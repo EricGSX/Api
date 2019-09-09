@@ -10,6 +10,7 @@ use \App\Model\Actions;
 use \App\Model\Configs;
 use \App\Model\UserRoles;
 use \App\Model\RolesPermission;
+use App\Libs\Api;
 
 class RolesController extends BaseController
 {
@@ -35,7 +36,10 @@ class RolesController extends BaseController
             }
         }
         $allModules = Modules::all();
-        $allUsers = DB::connection('sqlsrv')->select("SELECT id FROM [OceaniaERP].[dbo].[OC_User_Info] where status <> '-1'");
+        //$allUsers = DB::connection('sqlsrv')->select("SELECT id FROM [OceaniaERP].[dbo].[OC_User_Info] where status <> '-1'");
+        $api = new Api();
+        $userDataJson = $api->httpRequest('http://192.168.11.49/DataCenter/account/GetUsers?UserName=&Department=&InActive=true',['type'=>'user']);
+        $allUsers = json_decode($userDataJson,true);
         return view('roles.index',compact('users','allActions','allUsers','allModules','userRoles','allRoles'));
     }
 
@@ -58,7 +62,10 @@ class RolesController extends BaseController
             }
         }
         $allModules = Modules::all();
-        $allRoles = DB::connection('sqlsrv')->select("SELECT id,displayname FROM [OceaniaERP].[dbo].[OC_Role] where status <> '-1'");
+        //$allRoles = DB::connection('sqlsrv')->select("SELECT id,displayname FROM [OceaniaERP].[dbo].[OC_Role] where status <> '-1'");
+        $api = new Api();
+        $rolesDataJson = $api->httpRequest('http://192.168.11.49/DataCenter/account/GetRoles',['type'=>'user']);
+        $allRoles = json_decode($rolesDataJson,true);
         return view('roles.index2',compact('role','allActions','allUsers','allModules','userRoles','allRoles'));
     }
 

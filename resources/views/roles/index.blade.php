@@ -30,10 +30,10 @@
                     <select class="form-control selectpicker" id="allUsers"  data-live-search="true"  autocomplete="off" style="width: 70%;"  v-cloak>
                                 <option value=""> -- 请选择用户 -- </option>
                         @foreach($allUsers as $allUser)
-                            @if($allUser->id == $users)
-                                <option selected="selected" value="{{$allUser->id}}">{{$allUser->id}}</option>
+                            @if($allUser['ID'] == $users)
+                                <option selected="selected" value="{{$allUser['ID']}}">{{$allUser['ID']}}</option>
                             @else
-                                <option value="{{$allUser->id}}">{{$allUser->id}}</option>
+                                <option value="{{$allUser['ID']}}">{{$allUser['ID']}}</option>
                             @endif
                         @endforeach
                     </select>

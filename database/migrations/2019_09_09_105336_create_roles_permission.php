@@ -15,7 +15,7 @@ class CreateRolesPermission extends Migration
     {
         Schema::create('roles_permission', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('roles_name',50);
+            $table->string('roles_name',100);
             $table->text('modules_actions');
             $table->timestamps();
         });

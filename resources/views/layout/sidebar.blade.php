@@ -60,11 +60,19 @@
             </span>
           </a>
           <ul class="treeview-menu">
+              @if(strstr(session('userRolesList'),'RolesController-rolesIndex'))
+                  @if($actionName=='rolesIndex')
+                      <li class="active"><a href="/roless"><i class="fa fa-circle-o text-red"></i>Assin Roles Permission</a></li>
+                  @else
+                      <li><a href="/roless"><i class="fa fa-circle-o"></i> Assin Roles Permission</a></li>
+                  @endif
+              @endif
+
               @if(strstr(session('userRolesList'),'RolesController-index'))
                   @if($actionName=='index')
-                      <li class="active"><a href="/roles"><i class="fa fa-circle-o text-red"></i>Assin Roles</a></li>
+                      <li class="active"><a href="/roles"><i class="fa fa-circle-o text-red"></i>Assin Users Permission</a></li>
                   @else
-                      <li><a href="/roles"><i class="fa fa-circle-o"></i> Assin Roles</a></li>
+                      <li><a href="/roles"><i class="fa fa-circle-o"></i> Assin Users Permission</a></li>
                   @endif
               @endif
 

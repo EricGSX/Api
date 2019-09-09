@@ -25,9 +25,11 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('/sales/declineDetail','Erp\SalesController@show');
     //权限分配
     Route::get('/roles','Erp\RolesController@index');
+    Route::get('/roless','Erp\RolesController@rolesIndex');
     Route::get('/roles/create','Erp\RolesController@create');
     Route::post('/roles/create','Erp\RolesController@store');
     Route::post('/roles/assign','Erp\RolesController@assignRoles');
+    Route::post('/roless/assign','Erp\RolesController@rolesPermission');
     Route::get('/roles/list','Erp\RolesController@roleLists');
 
     //配置缓存

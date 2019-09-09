@@ -6,10 +6,11 @@
     <link type="text/css" rel="styleSheet"  href="{{asset('login/css/main.css')}}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="{{asset('js/jquery-3.4.0.min.js')}}"></script>
+    <link rel="icon" href="{{asset('favicon.ico')}}" type="image/gif" >
 <script type="text/javascript">
 window.jQuery || document.write(unescape("%3Cscript src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.0.min.js' type='text/javascript'%3E%3C/script%3E"))
 </script>
-    <title>账号登录</title>
+    <title>Data Center</title>
     <style>
         *{
             margin: 0;

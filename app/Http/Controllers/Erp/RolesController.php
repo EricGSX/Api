@@ -9,6 +9,7 @@ use \App\Model\Modules;
 use \App\Model\Actions;
 use \App\Model\Configs;
 use \App\Model\UserRoles;
+use \App\Model\RolesPermission;
 
 class RolesController extends BaseController
 {
@@ -35,7 +36,46 @@ class RolesController extends BaseController
         }
         $allModules = Modules::all();
         $allUsers = DB::connection('sqlsrv')->select("SELECT id FROM [OceaniaERP].[dbo].[OC_User_Info] where status <> '-1'");
-        return view('roles.index',compact('users','allActions','allUsers','allModules','userRoles'));
+        return view('roles.index',compact('users','allActions','allUsers','allModules','userRoles','allRoles'));
+    }
+
+    /**
+     * 角色授权页面
+     */
+    public function rolesIndex(Request $request)
+    {
+        BaseController::webAuthTokenCheck();
+        $role = $request->role;
+        $userRoles = [];
+        if(!$role){
+            $allActions = [];
+        }else{
+            $configsCache = Configs::where('type','RolesList')->firstOrFail();
+            $allActions = json_decode($configsCache->content,true);
+            $userRolesObj = RolesPermission::where('roles_name',$role)->first();
+            if($userRolesObj){
+                $userRoles = explode(';',$userRolesObj->modules_actions);
+            }
+        }
+        $allModules = Modules::all();
+        $allRoles = DB::connection('sqlsrv')->select("SELECT id,displayname FROM [OceaniaERP].[dbo].[OC_Role] where status <> '-1'");
+        return view('roles.index2',compact('role','allActions','allUsers','allModules','userRoles','allRoles'));
+    }
+
+    /**
+     * 角色授权
+     */
+    public function rolesPermission(Request $request)
+    {
+        BaseController::webAuthTokenCheck();
+        $request->validate([
+                               'nowrole' => 'required|string',
+                               'checkedRoles' => 'required|array'
+                           ]);
+        $rolesContent = implode(';',$request->checkedRoles);
+        $rolesUser = $request->nowrole;
+        RolesPermission::updateOrCreate(['roles_name'=>$rolesUser],['modules_actions'=>$rolesContent]);
+        return redirect("/roless?role=$rolesUser");
     }
 
     /**

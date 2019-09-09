@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Jwt\GuoJwt;
 use \App\Model\UserRoles;
+use \App\Model\RolesPermission;
 
 class BaseController extends Controller
 {
@@ -44,18 +45,27 @@ class BaseController extends Controller
             die;
         }
         $users = $payLoad['msg']['accountName'];
-        $userRolesObj = UserRoles::where('username',$users)->first();
-        $userRoles = '';
-        if($userRolesObj){
-            $userRoles = $userRolesObj->modules_actions;
+        $userPermissionObj = UserRoles::where('username',$users)->first();
+        $userPermission = '';
+
+        if($userPermissionObj){
+            $userPermission = $userPermissionObj->modules_actions;
         }
-        $userRoles .= ';LoginController-show;';
-        if(!strstr($userRoles,$currentAction)){
+        $userPermission .= ';LoginController-show;';
+
+        $roles = $payLoad['msg']['role'];
+        $rolesPermission = RolesPermission::wherein('roles_name',explode(',',$roles))->get();
+        if($rolesPermission){
+            foreach ($rolesPermission as $value){
+                $userPermission .= $value->modules_actions;
+            }
+        }
+        if(!strstr($userPermission,$currentAction)){
             echo '<b style="color:red;font-weight: bold;">The current user does not have the right to change the operation, please contact the administrator Will/Mungo/Eric</b>';
             die;
         }
         session()->put('payLoad',$payLoad['msg']);
-        session()->put('userRolesList',$userRoles);
+        session()->put('userRolesList',$userPermission);
         session()->save();
         return true;
     }

@@ -30,7 +30,8 @@ class LoginController extends Controller
             $key = env('APP_KEY');
             $jwt = new GuoJwt($key);
             $api = new Api();
-            $userDataJson = $api->httpRequest('http://192.168.11.49/DataCenter/Account/Login',$request->all());
+            $dataCenterApi = env('DATACENTER_LOGIN');
+            $userDataJson = $api->httpRequest($dataCenterApi,$request->all());
             $userData = json_decode($userDataJson,TRUE);
             if($userData){
                 $allRoles = array_column($userData['Roles'],'ID');

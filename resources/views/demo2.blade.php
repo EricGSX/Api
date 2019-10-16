@@ -16,19 +16,20 @@
     </section>
     <section class="content">
        <div class="row">
-        <section class="col-lg-12 connectedSortable">
+        <section class="col-lg-6 connectedSortable">
           <div class="nav-tabs-custom">
-              <p id="userinfo" class="Graph">123</p>
-              <div id='app'>
-	<select class="selectpicker" data-live-search="true" v-model="username" style="width: 70%;" >
-  <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
-  <option data-tokens="mustard">Burger, Shake and a Smile</option>
-  <option data-tokens="frosting">Sugar, Spice and all things nice</option>
-</select>
+                    123123123
+          </div>
+        </section>
 
 
-
-</div>
+           <section class="col-lg-6 connectedSortable">
+          <div class="nav-tabs-custom">
+                    123123123
+          </div>
+        </section>           <section class="col-lg-6 connectedSortable">
+          <div class="nav-tabs-custom">
+                    123123123
           </div>
         </section>
       </div>

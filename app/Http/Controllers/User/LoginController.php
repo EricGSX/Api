@@ -47,7 +47,10 @@ class LoginController extends Controller
                 ];
                 $token=$jwt->getToken($payLoad);
                 return response()->json(['code' => 200, 'token'=> $token]);
-            }else{
+            }elseif($userDataJson){
+                return response()->json(['code' => 403, 'msg'  => '数据库连接超时，请稍后重试']);
+            }
+            else{
                 return response()->json(['code' => 403, 'msg'  => '账号密码错误']);
             }
         }catch (\Exception $e){

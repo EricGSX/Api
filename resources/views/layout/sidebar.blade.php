@@ -37,9 +37,9 @@
           <ul class="treeview-menu">
               @if(strstr(session('userRolesList'),'SalesController-index'))
                   @if($actionName == 'index')
-                      <li class="active"><a href="/sales/decline"><i class="fa fa-circle-o text-red"></i> Index</a></li>
+                      <li class="active"><a href="/sales/decline"><i class="fa fa-circle-o text-red"></i> Data List</a></li>
                   @else
-                      <li><a href="/sales/decline"><i class="fa fa-circle-o"></i> Index</a></li>
+                      <li><a href="/sales/decline"><i class="fa fa-circle-o"></i> Data List</a></li>
                   @endif
               @endif
           </ul>

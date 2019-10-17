@@ -379,6 +379,7 @@ window.jQuery || document.write(unescape("%3Cscript src='https://ajax.aspnetcdn.
                 window.location.href = '/users?token='+data.token;
             }else{
                 alert(data.msg);
+                location.reload();
             }
         });
     }

@@ -9,6 +9,8 @@ class ApiController extends Controller
 {
     public function createJwt()
     {
+        header("Content-Security-Policy: upgrade-insecure-requests");
+        header('Access-Control-Allow-Origin:*');
         $key = env('APP_KEY');
         $jwt = new GuoJwt($key);
         $payLoad = \request()->all();
@@ -18,6 +20,8 @@ class ApiController extends Controller
 
     public function checkJwt()
     {
+        header("Content-Security-Policy: upgrade-insecure-requests");
+        header('Access-Control-Allow-Origin:*');
         $token = \request()->token;
         $key = env('APP_KEY');
         $jwt = new GuoJwt($key);

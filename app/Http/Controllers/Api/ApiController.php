@@ -11,10 +11,7 @@ class ApiController extends Controller
     {
         $key = env('APP_KEY');
         $jwt = new GuoJwt($key);
-        $payLoad = [
-            'iat'         => time(),
-            'exp'         => time() + 36000
-        ];
+        $payLoad = \request()->all();
         $token=$jwt->getToken($payLoad);
         echo json_encode(['code'=>200,'msg'=>$token]);
     }

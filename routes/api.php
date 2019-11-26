@@ -22,3 +22,7 @@ Route::group(['middleware'=>'check_jwt'],function(){
     Route::get('/user','User\UserController@test');
     Route::get('/test','Erp\SalesController@test');
 });
+
+//接口
+Route::post('/token','Api\ApiController@createJwt');
+Route::post('/token/check','Api\ApiController@checkJwt');
